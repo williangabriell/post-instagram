@@ -1,4 +1,5 @@
-import { randomUUID } from "node:crypto";
+
+import {v4 as randomUUID}from "uuid"
 import { faker } from "@faker-js/faker";
 
 class Post {
@@ -51,6 +52,8 @@ for (let index = 0; index < 15; index++) {
   posts.push(post);
 }
 
-posts[0].like();
-// posts[0].like();
-console.log(posts[0]);
+// toHTML(){
+// const div = document.createElement('div')
+// div.innerHTML = `<b>${this._userName}</b>`
+// document.body.appendChild(div)
+// }
