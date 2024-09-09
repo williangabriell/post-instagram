@@ -1,5 +1,5 @@
 
-import {v4 as randomUUID}from "uuid"
+import { v4 as randomUUID } from "uuid";
 import { faker } from "@faker-js/faker";
 
 class Post {
@@ -36,6 +36,57 @@ class Post {
     } else {
       this._numberOfLikes -= 1;
     }
+    const postContainer = document.getElementById(this._id)
+    const btnLike = postContainer?.querySelector('#btn-like')
+  }
+
+  toHTML() {
+    const postContainer = document.createElement("div");
+    postContainer.className = "post-container";
+
+    const postHeader = `
+      <div class = 'post-header">
+      <div>
+        <img title = 'Avatar image'
+        src=${this._avatarUrl}
+      </div>
+      <span>${this._userName}</span>
+      </div>
+    `;
+
+    const postImage = `
+      <div class="post-image"
+        <img title="Post Image"
+          src=${this._imageUrl}>
+      </div>
+    `;
+
+    const postIcons = `
+      <div>
+            <div id="btn-like" onclick="$()">
+              <i class="fa fa-heart-o"></i>
+            </div>
+            <div>
+              <i class="fa fa-comment-o"></i>
+            </div>
+            <div>
+              <i class="fa fa-paper-plane-o"></i>
+            </div>            
+          </div>
+          <div>
+            <i class="fa fa-bookmark-o"></i>
+          </div>
+    `
+
+    postContainer.innerHTML = postHeader;
+    postContainer.innerHTML += postImage;
+    postContainer.innerHTML += postIcons;
+
+    const btnLike = postContainer.querySelector('#btn-like')
+    btnLike?.addEventListener("click", this.like)
+
+    document.body.appendChild(postContainer);
+
   }
 }
 
@@ -51,9 +102,3 @@ for (let index = 0; index < 15; index++) {
 
   posts.push(post);
 }
-
-// toHTML(){
-// const div = document.createElement('div')
-// div.innerHTML = `<b>${this._userName}</b>`
-// document.body.appendChild(div)
-// }
