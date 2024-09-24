@@ -172,9 +172,9 @@ ul li a i:hover {
 
 .profile-section {
   width: 300px;
-  position: fixed; /* Fixa a lista no lado direito */
-  top: 20px; /* Ajusta a distância do topo da tela */
-  right: 20px; /* Ajusta a distância do lado direito da tela */
+  position: fixed; 
+  top: 20px; 
+  right: 20px; 
 }
 
 .profile {
@@ -269,6 +269,10 @@ ul li a i:hover {
   .sidebar,
   .profile-section {
     display: none;
+  }
+  .story img {
+    width: 40px;
+    height: 40px;
   }
 }
 
