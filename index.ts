@@ -23,23 +23,33 @@ class Post {
     this._description = description;
   }
 
-  like() {
-    const postContainer = document.getElementById(this._id);
-    const btnLike = postContainer?.querySelector("#btn-like");
-    const icon = btnLike?.children[0];
 
-    if (!icon) return;
-    this.updateLikeIcon(icon)
+like() {
+  const postContainer = document.getElementById(this._id);
+  const btnLike = postContainer?.querySelector("#btn-like");
+  const icon = btnLike?.children[0];
 
+  if (!icon) return;
 
-    this._isLiked = !this._isLiked;
+  // Remove o coração preenchido e adiciona o coração vazio
+  if (this._isLiked) {
+    icon.classList.remove("fa-heart");
+    icon.classList.remove("liked");
+    icon.classList.add("fa-heart-o");
+
+    // Incrementa o número de likes
+    this._numberOfLikes += 1;
+  } else {
+    // Remove o coração vazio e adiciona o coração preenchido
+    icon.classList.remove("fa-heart-o");
+    icon.classList.add("fa-heart");
+    icon.classList.add("liked");
+
+    // Descrementa o número de likes
+    this._numberOfLikes -= 1;
   }
 
-  private updateLikeIcon(icon: Element) {
-    // 
-    icon.classList.toggle("fa-heart");
-    icon.classList.toggle("liked");
-    icon.classList.toggle("fa-heart-o");
+  this._isLiked = !this._isLiked;
 }
 
   toHTML() {
@@ -84,9 +94,17 @@ class Post {
       </div>
     `;
 
+    const numberOfLikes = `
+      <div class="post-likes">
+        <i class="fa fa-heart"></i>
+        100 likes
+      </div>
+    `
+
     postContainer.innerHTML = postHeader;
     postContainer.innerHTML += postImage;
     postContainer.innerHTML += postIcons;
+    postContainer.innerHTML += numberOfLikes;
 
     const btnLike = postContainer.querySelector("#btn-like");
     btnLike?.addEventListener("click", () => this.like());
